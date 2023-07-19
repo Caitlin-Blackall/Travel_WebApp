@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="sub-headings">
+        {% block title %} Edit Details for: {{ place.city.title() }}, {{ place.country.title() }}
+        {% endblock %}
+    </h1>
+    <form method="post" class="recommendation_form">
+        <p>
+            <label for="city" class="form_padding">City</label>
+            <input type="text" name="city"
+                   value={{ place.city }}
+                   placeholder="City">
+            </input>
+        </p>
+
+        <p>
+            <label for="country" class="form_padding">Country</label>
+            <input type="text" name="country"
+                   value={{ place.country }}
+                   placeholder="Country">
+            </input>
+        </p>
+
+        <p>
+        <label for="recommendation" class="form_padding">Recommendation</label>
+        <br>
+        <textarea name="recommendation"
+                  placeholder="Recommendations"
+                  rows="10"
+                  cols="30"
+                  class="box_margin">{{ place.recommendation }}</textarea>
+        </p>
+
+        <p>
+        <label for="review" class="form_padding">Review</label>
+        <br>
+        <textarea name="review"
+                  placeholder="Review"
+                  rows="10"
+                  cols="30"
+                  class="box_margin">{{ place.review }}</textarea>
+        </p>
+        <p>
+            <button type="submit" id="submit_button">Submit</button>
+        </p>
+    </form>
+{% endblock %}

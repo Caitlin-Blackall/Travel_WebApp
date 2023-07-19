@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="sub-headings">{% block title %} Places to Go {% endblock %}</h1>
+    <div class="add">
+        <a href="{{ url_for('add_recommendation') }}"><h3>Add New Recommendation</h3></a>
+    </div>
+    <div class="content">
+        {% for place in recommendations %}
+            <div class="recommendations">
+                <p id="recommendations_title">{{ place.city.title() }}, {{ place.country.title() }}</p>
+                <div>
+                    <h4>Recommendation:</h4>
+                    <p>{{ place.recommendation.capitalize() }}</p>
+                </div>
+                <form method="post" action="places_been">
+                    <input type="hidden" name="city" value="{{ place.city }}">
+                    <input type="hidden" name="country" value="{{ place.country }}">
+                    <input type="hidden" name="recommendation" value="{{ place.recommendation }}">
+                    <input type="hidden" name="place_id" value="{{ place.id }}">
+                    <button type="submit">I've Been Here</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

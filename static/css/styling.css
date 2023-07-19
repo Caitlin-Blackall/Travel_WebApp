@@ -1,0 +1,138 @@
+/* IMAGES */
+/* LINKS */
+a {
+  color: DarkBlue;
+  text-decoration: none;
+  }
+
+a:hover {
+  color: Blue;
+  }
+
+#nav-bar {
+  position: fixed;
+  letter-spacing: 0.3em;
+  background-color: lightblue;
+  height: 30px;
+  width: 100%;
+  line-height: 30px;
+  }
+
+button {
+  float: right;
+  padding: 3px 10px;
+  font-family: Arial;
+  font-size: 15px;
+  color: DarkBlue;
+  text-decoration: none;
+  }
+
+button:hover {
+  color: Blue;
+  }
+
+#button {
+  border-style: solid;
+  border-color: black;
+  border-width: thin;
+  padding: 3px 10px;
+  font-size: 15px;
+  float: right;
+  }
+
+#button:hover {
+  background-color: Gainsboro;
+  }
+
+/* HEADERS */
+#header-text {
+  color: DarkBlue;
+  font-size: 100px;
+  font-weight: bold;
+  text-align: center !important;
+  padding: 0px;
+  }
+
+#center {
+  text-align: center !important;
+  }
+
+.sub-headings {
+  color: DarkBlue;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: Arial;
+  }
+
+h1 {
+  text-align: center;
+  padding: 40px;
+  font-size: 40px;
+  }
+
+.add {
+  margin: 0px 10px 12px 12px;
+  font-size: 20px;
+  font-family: Arial;
+  }
+
+
+/* BODY */
+body {
+  margin: 0;
+  }
+
+.content {
+  margin: 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-family: Arial;
+  }
+
+.recommendations {
+  flex: 20%;
+  padding: 10px;
+  margin: 5px;
+  background-color: #f3f3f3;
+  inline-size: 100%;
+  }
+
+#recommendations_title {
+  font-size: 20px;
+  font-weight: bold;
+  }
+
+.listing {
+  margin: 0px 10px 12px 12px;
+  font-size: 30px;
+  font-family: Arial;
+  line-height: 2em;
+  }
+
+/* FORMS */
+.recommendation_form {
+  margin: 10px 10px 10px 20px;
+  font-size: 20px;
+  font-family: Arial;
+  }
+
+.input {
+  width: 200px;
+  height: 20px;
+  }
+
+.form_padding {padding: 10px;}
+
+#submit_button {
+  width: 250px;
+  height: 50px;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  margin-left: 10px;
+  float: left;
+  }
+
+.box_margin {margin-left: 10px}

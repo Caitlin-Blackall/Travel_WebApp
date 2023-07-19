@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <span class="sub-headings">
+        <h1>{% block title %} {{ place.city.title() }}, {{ place.country.title() }} {% endblock %}</h1>
+    </span>
+    <div class="add">
+            <div class="content">
+                <p>{{ place.recommendations }}</p>
+                <p>{{ place.review }}</p>
+                <div class="bio">
+                    <h4>Review</h4>
+                    <p>{{ recipe.review }}</p>
+                </div>
+            </div>
+    </div>
+{% endblock %}

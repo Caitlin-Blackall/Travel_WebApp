@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="{{ url_for('static', filename='css/styling.css') }}" rel="stylesheet" />
+    <title id="center">{% block title %}  {% endblock %} </title>
+    <style>{% block style %} {% endblock %} </style>
+
+</head>
+<body>
+    <nav id="nav-bar">
+        &nbsp
+        <a href="{{url_for('index')}}">Return Home</a>
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        <a href="{{url_for('places_togo')}}">Places to Go</a>
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        <a href="{{url_for('places_been')}}">Places I've Been</a>
+        &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        <a href="{{url_for('plan')}}">Plan a Trip  </a>
+    </nav>
+    <hr>
+    <div>
+        {% block content %} {% endblock %}
+    </div>
+</body>
+</html>

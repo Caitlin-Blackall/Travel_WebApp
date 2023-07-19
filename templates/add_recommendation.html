@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="sub-headings">{% block title %} Add Recommendation {% endblock %}</h1>
+   <form method="post" class="recommendation_form">
+        <p>
+            <label for="city" class="form_padding">Enter City: </label>
+            <input type="text" name="city"
+                   placeholder="City" class="input">
+            </input>
+        </p>
+        <p>
+            <label for="country" class="form_padding">Enter Country: </label>
+            <input type="text" name="country"
+                   placeholder="Country" class="input">
+            </input>
+        </p>
+
+        <p>
+        <label for="recommendation" class="form_padding">Enter Recommendation: </label>
+        <br><br>
+        <textarea name="recommendation"
+                  placeholder="Recommendation"
+                  rows="5"
+                  cols="50"
+                  class="box_margin"></textarea>
+        </p>
+        <p>
+            <button type="submit" id="submit_button">Submit Recommendation</button>
+        </p>
+    </form>
+{% endblock %}

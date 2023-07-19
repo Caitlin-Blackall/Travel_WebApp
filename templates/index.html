@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>{% block style %} body {
+        background-image: url("{{ url_for('static', filename='images/Header_Image.JPG') }}");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        }
+    {% endblock %} </style>
+    <h1 id="header-text">{% block title %} Welcome to Caity's Travel WebApp {% endblock %}</h1>
+
+
+{% endblock %}

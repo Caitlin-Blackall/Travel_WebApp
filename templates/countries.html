@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="sub-headings">{% block title %} Countries Visited {% endblock %}</h1>
+    <div class="add">
+        <a href="{{ url_for('cities') }}"><h3>Show List of Cities</h3></a>
+        <a href="{{ url_for('places_been') }}"><h3>Go Back to Places I've Been</h3></a>
+    </div>
+    <div class="listing">
+        <ol>
+        {% for country in unique_countries %}
+            <li>{{ country }}</li>
+        {% endfor %}
+        </ol>
+    </div>
+{% endblock %}
