@@ -20,6 +20,13 @@
                     <input type="hidden" name="place_id" value="{{ place.id }}">
                     <button type="submit">I've Been Here</button>
                 </form>
+                <form method="post" action="city_plan">
+                    <input type="hidden" name="city" value="{{ place.city }}">
+                    <input type="hidden" name="country" value="{{ place.country }}">
+                    <input type="hidden" name="recommendation" value="{{ place.recommendation }}">
+                    <input type="hidden" name="place_id" value="{{ place.id }}">
+                    <button type="submit">Plan this Trip</button>
+                </form>
             </div>
         {% endfor %}
     </div>

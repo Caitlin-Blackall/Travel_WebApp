@@ -9,7 +9,9 @@
     <div class="content">
         {% for place in places_been %}
             <div class="recommendations">
-                <p id="recommendations_title">{{ place.city.title() }}, {{ place.country.title() }}</p>
+                <a href="{{ url_for('place', place_id=place.id) }}" id="recommendations_title">
+                    {{ place.city.title() }}, {{ place.country.title() }}
+                </a>
                 <div>
                     <h4>Recommendations:</h4>
                     <p>{{ place.recommendation.capitalize() }}</p>

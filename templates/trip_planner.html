@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="sub-headings">{% block title %} Your Next Trip! {% endblock %}</h1>
+    {%for trip in trip_toplan %}
+        <div class="sub-headings">
+            <h6>Trip Start Date: {{ trip.start_date }} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                Trip End Date: {{ trip.end_date }} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                Trip Budget: {{ trip.budget }}</h6>
+            <h6>Trip Non-Negotiables: {{ trip.non_negotiables }}</h6>
+        </div>
+        <div>{{ trip.country }}</div>
+        <div>{{ trip.city }}</div>
+        <div>All places: {{ trip.all_places }}</div>
+        <div class="content">
+            {% for place in total_places %}
+                <div>
+                    <div class="plan_trip">
+                        <p id="recommendations_title">Countries</p>
+                        <p>{{ place }}</p>
+                    </div>
+                    <div class="plan_trip">
+                        <p id="recommendations_title">Cities</p>
+                        {% for city in total_places[place] %}
+                            <p>{{ city }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="plan_trip"><p id="recommendations_title">Accomodation</p></div>
+            <div class="plan_trip"><p id="recommendations_title">Accomodation Cost</p></div>
+            <div class="plan_trip"><p id="recommendations_title">Travel</p></div>
+            <div class="plan_trip"><p id="recommendations_title">Travel Cost</p></div>
+            <div class="plan_trip"><p id="recommendations_title">Activities</p></div>
+            <div class="plan_trip"><p id="recommendations_title">Activity Cost</p></div>
+        </div>
+    {% endfor %}
+{% endblock %}

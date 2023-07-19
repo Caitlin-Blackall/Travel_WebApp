@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="sub-headings">{% block title %} Plan a Trip {% endblock %}</h1>
+    <form method="get" class="recommendation_form">
+        <p>
+            <label for="cities" class="form_padding">Enter Number of Cities to Visit: </label>
+            <input type="text" name="cities"
+                   placeholder="No. Cities" class="input">
+            </input>
+        </p>
+        <p>
+            <button type="submit" id="submit_button">Let's Plan</button>
+        </p>
+    </form>
+{% endblock %}
