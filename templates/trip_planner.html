@@ -2,37 +2,94 @@
 
 {% block content %}
     <h1 class="sub-headings">{% block title %} Your Next Trip! {% endblock %}</h1>
-    {%for trip in trip_toplan %}
-        <div class="sub-headings">
-            <h6>Trip Start Date: {{ trip.start_date }} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                Trip End Date: {{ trip.end_date }} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                Trip Budget: {{ trip.budget }}</h6>
-            <h6>Trip Non-Negotiables: {{ trip.non_negotiables }}</h6>
+    <div class="trip-content">
+        <div class="trip-recommendations-first1">
+            <p class="trip-bold">Trip Total Cost: £{{ trip.total_cost }}</p>
         </div>
-        <div>{{ trip.country }}</div>
-        <div>{{ trip.city }}</div>
-        <div>All places: {{ trip.all_places }}</div>
-        <div class="content">
-            {% for place in total_places %}
-                <div>
-                    <div class="plan_trip">
-                        <p id="recommendations_title">Countries</p>
-                        <p>{{ place }}</p>
-                    </div>
-                    <div class="plan_trip">
-                        <p id="recommendations_title">Cities</p>
-                        {% for city in total_places[place] %}
-                            <p>{{ city }}</p>
-                        {% endfor %}
-                    </div>
-                </div>
+        <div class="trip-recommendations-second1">
+            <p class="trip-bold">Trip Budget (pp/day): £{{ trip.budget }}</p>
+        </div>
+    </div>
+    <div class="trip-content">
+        <div class="trip-recommendations-first2">
+            <p class="trip-bold">Trip Start Date: {{ trip.start_date }}</p>
+            <p class="trip-bold">Trip End Date: {{ trip.end_date }}</p>
+        </div>
+        <div class="trip-recommendations-second2">
+            <p class="trip-bold">Trip Non-Negotiables:</p>
+            {% for nonneg in non_negotiables %}
+                <p>{{ nonneg }}</p>
             {% endfor %}
-            <div class="plan_trip"><p id="recommendations_title">Accomodation</p></div>
-            <div class="plan_trip"><p id="recommendations_title">Accomodation Cost</p></div>
-            <div class="plan_trip"><p id="recommendations_title">Travel</p></div>
-            <div class="plan_trip"><p id="recommendations_title">Travel Cost</p></div>
-            <div class="plan_trip"><p id="recommendations_title">Activities</p></div>
-            <div class="plan_trip"><p id="recommendations_title">Activity Cost</p></div>
         </div>
-    {% endfor %}
+    </div>
+    <div class="trip-content">
+        <div class="trip-recommendations-first3">
+            <a href="{{ url_for('edit_trip', trip_id=trip.id) }}"><h3 class="trip_planning">Edit Trip</h3></a>
+        </div>
+        <div class="trip-recommendations-second3">
+            <a href="{{ url_for('plan', trip_id=trip.id) }}"><h3 class="trip_planning">Finalise this Trip</h3></a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="plan_trip">
+            <p id="recommendations_title">Countries</p>
+        </div>
+        <div class="plan_trip">
+            <p id="recommendations_title">Cities</p>
+        </div>
+        <div class="plan_trip"><p id="recommendations_title">Accomodation</p></div>
+        <div class="plan_trip"><p id="recommendations_title">Accomodation Cost</p></div>
+        <div class="plan_trip"><p id="recommendations_title">Travel</p></div>
+        <div class="plan_trip"><p id="recommendations_title">Travel Cost</p></div>
+        <div class="plan_trip"><p id="recommendations_title">Activities</p></div>
+        <div class="plan_trip"><p id="recommendations_title">Activity Cost</p></div>
+    </div>
+    <div class="content">
+        <div class="plan_trip">
+            {% for country in countries %}
+                <p>{{ country }}</p>
+            {% endfor %}
+        </div>
+        <div class="plan_trip">
+            {% for city in cities %}
+                <p>{{ city }}</p>
+            {% endfor %}
+        </div>
+        <div class="plan_trip">
+            {% for accom in accomodation %}
+                <p>{{ accom }}</p>
+            {% endfor %}
+        </div>
+        <div class="plan_trip">
+            {% if trip.accomodation_cost != 0 %}
+                    <p>{{ trip.accomodation_cost }}</p>
+                {% else %}
+                    <p></p>
+            {% endif %}
+        </div>
+        <div class="plan_trip">
+            {% for tra in travel %}
+                <p>{{ tra }}</p>
+            {% endfor %}
+        </div>
+        <div class="plan_trip">
+            {% if trip.travel_cost != 0 %}
+                <p>{{ trip.travel_cost }}</p>
+            {% else %}
+                <p></p>
+            {% endif %}
+        </div>
+        <div class="plan_trip">
+            {% for activity in activities %}
+                <p>{{ activity }}</p>
+            {% endfor %}
+        </div>
+        <div class="plan_trip">
+            {% if trip.activity_cost != 0 %}
+                    <p>{{ trip.activity_cost }}</p>
+                {% else %}
+                    <p></p>
+                {% endif %}
+        </div>
+    </div>
 {% endblock %}

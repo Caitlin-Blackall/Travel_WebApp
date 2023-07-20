@@ -3,80 +3,41 @@
 {% block content %}
     <h1 class="sub-headings">{% block title %} Plan a Trip {% endblock %}</h1>
     <div class="add">
-        <a href="{{ url_for('trip_planner') }}"><h3>Get Planning</h3></a>
+        <a href="{{ url_for('plan_trip') }}"><h3>Get Planning</h3></a>
     </div>
-    <form method="post" class="recommendation_form">
-        <p>
-            <label for="country1" class="form_padding">Enter Country: </label>
-            <input type="text" name="country1"
-                   placeholder="Country" class="input">
-            </input>
-            <label for="city1" class="form_padding">Enter Cities to Visit in this Country: </label>
-            <textarea name="city1"
-                  placeholder="Cities"
-                  rows="1"
-                  cols="70"
-                  class="city_padding"></textarea>
-        </p>
-
-        <p>
-            <label for="country2" class="form_padding">Enter Country: </label>
-            <input type="text" name="country2"
-                   placeholder="Country" class="input">
-            </input>
-            <label for="city2" class="form_padding">Enter Cities to Visit in this Country: </label>
-            <textarea name="city2"
-                  placeholder="Cities"
-                  rows="1"
-                  cols="70"
-                  class="city_padding"></textarea>
-        </p>
-
-        <p>
-            <label for="country3" class="form_padding">Enter Country: </label>
-            <input type="text" name="country3"
-                   placeholder="Country" class="input">
-            </input>
-            <label for="city3" class="form_padding">Enter Cities to Visit in this Country: </label>
-            <textarea name="city3"
-                  placeholder="Cities"
-                  rows="1"
-                  cols="70"
-                  class="city_padding"></textarea>
-        </p>
-
-        <p>
-            <label for="start_date" class="form_padding">Enter Trip Start Date: </label>
-            <input type="date" name="start_date"
-                   placeholder="Start Date" class="input">
-            </input>
-        </p>
-
-        <p>
-            <label for="end_date" class="form_padding">Enter Trip End Date: </label>
-            <input type="date" name="end_date"
-                   placeholder="End Date" class="input">
-            </input>
-        </p>
-
-        <p>
-            <label for="budget" class="form_padding">Enter Trip Budget: </label>
-            <input type="number" name="budget"
-                   placeholder="Budget" class="input">
-            </input>
-        </p>
-
-        <p>
-        <label for="non_negotiables" class="form_padding">Enter Trip Non Negotiables: </label>
-        <br><br>
-        <textarea name="non_negotiables"
-                  placeholder="Non Negotiables"
-                  rows="5"
-                  cols="50"
-                  class="box_margin"></textarea>
-        </p>
-        <p>
-            <button type="submit" id="submit_button">Get Planning!</button>
-        </p>
-    </form>
+    <div class="add">
+        <a href="{{ url_for('finalised_trips') }}"><h3>See Finalised Trip Itineraries</h3></a>
+    </div>
+    <div class="add">
+        <h3 class="h3">Trip Plans in Progress:</h3>
+    </div>
+    <div class="content">
+        {%for trip in trips %}
+            <div class="recommendations">
+                <div>
+                    <p class="trip-bold">Trip Dates:</p>
+                    <p>{{ trip.start_date }} to {{ trip.end_date }}</p>
+                    <p class="trip-bold">Trip To:</p>
+                    <p>Countries: {{ trip.country }}</p>
+                    <p>Cities: {{ trip.city }}</p>
+                </div>
+                <div>
+                    <a href="{{ url_for('trip_planner', trip_id=trip.id) }}" id="button">Continue Planning this Trip</a>
+                    <form method="post" action="finalised_trips">
+                        <input type="hidden" name="city" value="{{ trip.city }}">
+                        <input type="hidden" name="country" value="{{ trip.country }}">
+                        <input type="hidden" name="start_date" value="{{ trip.start_date }}">
+                        <input type="hidden" name="end_date" value="{{ trip.end_date }}">
+                        <input type="hidden" name="budget" value="{{ trip.budget }}">
+                        <input type="hidden" name="accomodation" value="{{ trip.accomodation }}">
+                        <input type="hidden" name="travel" value="{{ trip.travel }}">
+                        <input type="hidden" name="day_overview" value="{{ trip.day_overview }}">
+                        <input type="hidden" name="total_cost" value="{{ trip.total_cost }}">
+                        <input type="hidden" name="trip_id" value="{{ trip.id }}">
+                        <button type="submit">Finalise this Trip</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

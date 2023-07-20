@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="sub-headings">{% block title %} Plan a Trip {% endblock %}</h1>
+    <form method="post" class="recommendation_form">
+        <p>
+            <label for="country1" class="form_padding">Enter Country: </label>
+            <input type="text" name="country1"
+                   placeholder="Country" class="input">
+            </input>
+            <label for="city1" class="form_padding">Enter Cities to Visit in this Country: </label>
+            <textarea name="city1"
+                  placeholder="Cities"
+                  rows="1"
+                  cols="70"
+                  class="city_padding"></textarea>
+        </p>
+
+        <p>
+            <label for="country2" class="form_padding">Enter Country: </label>
+            <input type="text" name="country2"
+                   placeholder="Country" class="input">
+            </input>
+            <label for="city2" class="form_padding">Enter Cities to Visit in this Country: </label>
+            <textarea name="city2"
+                  placeholder="Cities"
+                  rows="1"
+                  cols="70"
+                  class="city_padding"></textarea>
+        </p>
+
+        <p>
+            <label for="country3" class="form_padding">Enter Country: </label>
+            <input type="text" name="country3"
+                   placeholder="Country" class="input">
+            </input>
+            <label for="city3" class="form_padding">Enter Cities to Visit in this Country: </label>
+            <textarea name="city3"
+                  placeholder="Cities"
+                  rows="1"
+                  cols="70"
+                  class="city_padding"></textarea>
+        </p>
+
+        <p>
+            <label for="start_date" class="form_padding">Enter Trip Start Date: </label>
+            <input type="date" name="start_date"
+                   placeholder="Start Date" class="input">
+            </input>
+        </p>
+
+        <p>
+            <label for="end_date" class="form_padding">Enter Trip End Date: </label>
+            <input type="date" name="end_date"
+                   placeholder="End Date" class="input">
+            </input>
+        </p>
+
+        <p>
+            <label for="budget" class="form_padding">Enter Trip Budget (pp/day): </label>
+            <input type="number" name="budget"
+                   placeholder="Budget" class="input">
+            </input>
+        </p>
+
+        <p>
+        <label for="non_negotiables" class="form_padding">Enter Trip Non Negotiables: </label>
+        <br><br>
+        <textarea name="non_negotiables"
+                  placeholder="Non Negotiables"
+                  rows="5"
+                  cols="50"
+                  class="box_margin"></textarea>
+        </p>
+        <p>
+            <button type="submit" id="submit_button">Get Planning!</button>
+        </p>
+    </form>
+{% endblock %}

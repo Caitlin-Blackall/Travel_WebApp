@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="sub-headings">
+        {% block title %} Edit Trip Details: {% endblock %}
+    </h1>
+    <form method="post" class="recommendation_form">
+        <div class="trip-content">
+            <div class="trip-recommendations-first1">
+                <p>
+                    <button type="submit" id="submit_button">Confirm Changes</button>
+                </p>
+            </div>
+            <div class="trip-recommendations-second1">
+                <p class="trip-bold">
+                    <label for="budget">Trip Budget (pp/day in £):</label>
+                    <input type="number" name="budget" value={{ trip.budget }}></input>
+                </p>
+            </div>
+        </div>
+        <div class="trip-content">
+            <div class="trip-recommendations-first2">
+                <p class="trip-bold">
+                    <label for="start_date">Start Date: </label>
+                    <input type="date" name="start_date" value={{ trip.start_date }} placeholder="Start Date"></input>
+                </p>
+                <p class="trip-bold">
+                    <label for="end_date">End Date: </label>
+                    <input type="date" name="end_date" value={{ trip.end_date }} placeholder="End Date"></input>
+                </p>
+            </div>
+            <div class="trip-recommendations-second2">
+                <p class="trip-bold">
+                    <label for="non_negotiables">Trip Non-Negotiables</label>
+                    <textarea name="non_negotiables" placeholder="Non-Negotiables" rows="5" cols="25">
+                        {{ trip.non_negotiables }}
+                    </textarea>
+                </p>
+            </div>
+        </div>
+        <div class="content">
+            <div class="plan_trip">
+                <p id="recommendations_title">
+                    <label for="country">Countries</label>
+                </p>
+            </div>
+            <div class="plan_trip">
+                <p id="recommendations_title"><label for="city">Cities</label></p>
+            </div>
+            <div class="plan_trip">
+                <p id="recommendations_title"><label for="accomodation">Accomodation</label></p>
+            </div>
+            <div class="plan_trip">
+                <p id="recommendations_title"><label for="accomodation_cost">Accomodation Cost</label></p>
+            </div>
+            <div class="plan_trip">
+                <p id="recommendations_title"><label for="travel">Travel</label></p>
+            </div>
+            <div class="plan_trip">
+                <p id="recommendations_title"><label for="travel_cost">Travel Cost</label></p>
+            </div>
+            <div class="plan_trip">
+                <p id="recommendations_title"><label for="day_overview">Activities</label></p>
+            </div>
+            <div class="plan_trip">
+                <p id="recommendations_title"><label for="activity_cost">Activity Cost</label></p>
+            </div>
+        </div>
+        <div class="content">
+            <div class="plan_trip">
+                <p>
+                    <textarea name="country" placeholder="Countries" rows="10" cols="15">
+                        {{ trip.country }}
+                    </textarea>
+                </p>
+            </div>
+            <div class="plan_trip">
+                <p>
+                    <textarea name="city" placeholder="Cities" rows="10" cols="15">
+                        {{ trip.city }}
+                    </textarea>
+                </p>
+            </div>
+            <div class="plan_trip">
+                <p>
+                    <textarea name="accomodation" placeholder="Accomodation" rows="10" cols="15">
+                        {{ trip.accomodation }}
+                    </textarea>
+                </p>
+            </div>
+            <div class="plan_trip">
+                <p>
+                    <textarea name="accomodation_cost" placeholder="Accomodation Cost" rows="10" cols="15">
+                        {{ trip.accomodation_cost }}
+                    </textarea>
+                </p>
+            </div>
+            <div class="plan_trip">
+                <p>
+                    <textarea name="travel" placeholder="Travel" rows="10" cols="15">
+                        {{ trip.travel }}
+                    </textarea>
+                </p>
+            </div>
+            <div class="plan_trip">
+                <p>
+                    <textarea name="travel_cost" placeholder="Travel Cost" rows="10" cols="15">
+                        {{ trip.travel_cost }}
+                    </textarea>
+                </p>
+            </div>
+            <div class="plan_trip">
+                <p>
+                    <textarea name="day_overview" placeholder="Activities" rows="10" cols="15">
+                        {{ trip.day_overview }}
+                    </textarea>
+                </p>
+            </div>
+            <div class="plan_trip">
+                <p>
+                    <textarea name="activity_cost" placeholder="Activity Cost" rows="10" cols="15">
+                        {{ trip.activity_cost }}
+                    </textarea>
+                </p>
+            </div>
+        </div>
+    </form>
+{% endblock %}

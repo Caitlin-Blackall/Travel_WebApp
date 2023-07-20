@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="sub-headings">{% block title %} Finalised Trips {% endblock %}</h1>
+    <div class="add">
+        <a href="{{ url_for('plan_trip') }}"><h3>Plan More Trips!</h3></a>
+    </div>
+    <div class="add">
+        <h3 class="h3">Finalised Trip Itineraries:</h3>
+    </div>
+    {%for trip in trips %}
+        <div class="content">
+            <div class="recommendations">
+                <p class="trip-bold">Trip To:</p>
+                <p>Countries: {{ trip.country }}</p>
+                <p>Cities: {{ trip.city }}</p>
+                <p class="trip-bold">Trip Dates:</p>
+                <p>{{ trip.start_date }} to {{ trip.end_date }}</p>
+                <p class="trip-bold">Trip Itinerary:</p>
+                <p>Activities: {{ trip.day_overview }}</p>
+                <p>Accomodation: {{ trip.accomodation }}</p>
+                <p>Travel: {{ trip.travel }}</p>
+                <p class="trip-bold">Total Trip Cost:</p>
+                <p>{{ trip.total_cost }}</p>
+                <form method="post" action="places_been">
+                    <input type="hidden" name="city" value="{{ trip.city }}">
+                    <input type="hidden" name="country" value="{{ trip.country }}">
+                    <input type="hidden" name="recommendation" value="{{ trip.day_overview }}">
+                    <input type="hidden" name="place_id" value="{{ trip.id }}">
+                    <button type="submit">I've Done this Trip</button>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
