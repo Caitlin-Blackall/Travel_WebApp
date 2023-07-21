@@ -3,10 +3,10 @@
 {% block content %}
     <h1 class="sub-headings">{% block title %} Plan a Trip {% endblock %}</h1>
     <div class="add">
-        <a href="{{ url_for('plan_trip') }}"><h3>Get Planning</h3></a>
+        <a href="{{ url_for('plan_trip') }}"><h3 class="trip_planning">Get Planning</h3></a>
     </div>
     <div class="add">
-        <a href="{{ url_for('finalised_trips') }}"><h3>See Finalised Trip Itineraries</h3></a>
+        <a href="{{ url_for('finalised_trips') }}"><h3 class="trip_planning">See Finalised Trip Itineraries</h3></a>
     </div>
     <div class="add">
         <h3 class="h3">Trip Plans in Progress:</h3>

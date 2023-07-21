@@ -3,7 +3,8 @@
 {% block content %}
     <h1 class="sub-headings">{% block title %} Finalised Trips {% endblock %}</h1>
     <div class="add">
-        <a href="{{ url_for('plan_trip') }}"><h3>Plan More Trips!</h3></a>
+        <a href="{{ url_for('plan_trip') }}"><h3 class="trip_planning">Plan More Trips!</h3></a>
+        <a href="{{ url_for('plan') }}"><h3 class="trip_planning">Trips in Planning</h3></a>
     </div>
     <div class="add">
         <h3 class="h3">Finalised Trip Itineraries:</h3>

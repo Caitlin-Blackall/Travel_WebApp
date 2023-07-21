@@ -3,8 +3,8 @@
 {% block content %}
     <h1 class="sub-headings">{% block title %} Places I've Been {% endblock %}</h1>
     <div class="add">
-        <a href="{{ url_for('cities') }}"><h3>Show List of Cities</h3></a>
-        <a href="{{ url_for('countries') }}"><h3>Show List of Countries</h3></a>
+        <a href="{{ url_for('cities') }}"><h3 class="trip_planning">Show List of Cities</h3></a>
+        <a href="{{ url_for('countries') }}"><h3 class="trip_planning">Show List of Countries</h3></a>
     </div>
     <div class="content">
         {% for place in places_been %}

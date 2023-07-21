@@ -6,21 +6,26 @@ from sqlalchemy import *
 from sqlalchemy.orm import *
 import datetime
 
+'''initiates the app'''
 app = Flask(__name__)
 
+'''handles app configuration and location of the database'''
 app.config['SECRET_KEY'] = 'mysecret'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///travel_webapp.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+'''initiates the database and links it to the app'''
 db = SQLAlchemy(app)
 
 class Recommendations(db.Model):
+    '''create the model used to store place recommendations'''
     id = db.Column(db.Integer, primary_key=True)
     city = db.Column(db.String(100), index=True, unique=False)
     country = db.Column(db.String(100), index=True, unique=False)
     recommendation = db.Column(db.String(150), index=True, unique=False)
 
 class Been(db.Model):
+    '''create the model used to store places that I've been to'''
     id = db.Column(db.Integer, primary_key=True)
     city = db.Column(db.String(100), index=True, unique=False)
     country = db.Column(db.String(100), index=True, unique=False)
@@ -28,6 +33,7 @@ class Been(db.Model):
     review = db.Column(db.String(150), index=True, unique=False)
 
 class Trip(db.Model):
+    '''create the model used to store finalised trip itineraries'''
     id = db.Column(db.Integer, primary_key=True)
     city = db.Column(db.String(100), index=True, unique=False)
     country = db.Column(db.String(100), index=True, unique=False)
@@ -40,6 +46,7 @@ class Trip(db.Model):
     total_cost = db.Column(db.Integer, unique=False)
 
 class TripPlan(db.Model):
+    '''create the model used to create and store trip plans'''
     id = db.Column(db.Integer, primary_key=True)
     city = db.Column(db.String(100), index=True, unique=False)
     country = db.Column(db.String(100), index=True, unique=False)
@@ -57,15 +64,30 @@ class TripPlan(db.Model):
 
 @app.route('/')
 def index():
+    '''
+    returns the template for the homepage
+    '''
     return render_template('index.html')
 
 @app.route('/places_togo', methods=["GET", "POST"])
 def places_togo():
+    '''
+    access the Recommendations model and passes these to the places_togo.html template
+    the template is returned on /places_togo URL
+    '''
     recommendations = Recommendations.query.all()
     return render_template('places_togo.html', recommendations=recommendations)
 
 @app.route('/add_recommendation', methods=["GET", "POST"])
 def add_recommendation():
+    '''
+    returns template that contains a form where recommendations can be added
+    if the form is submitted (ie. the request.method == 'POST'), the data within the form is accessed,
+        an instance of the Recommendations model is then created,
+        the data from the form is then saved (added and committed) to the database session
+        and finally the user is redirected to the url for places_togo
+    if the form is not submitted, the template for add_recommendation.html is displayed at the URL /add_recommendation
+    '''
     if request.method == 'POST':
         city = request.form['city'].title()
         country = request.form['country'].title()
@@ -78,6 +100,16 @@ def add_recommendation():
 
 @app.route('/places_been', methods=["GET", "POST"])
 def places_been():
+    '''
+    accesses the Been model and displays all the places that I've been according to the places_been template
+    if the user has been directed to this page from a different webpage (ie. redirected from 'Places to Go' or
+        'Trip Review'), the information from the form submitted in those templates is accessed and saved as a new
+        instance of the Been model
+        as there are two routes that can be redirected here, it needs to be clear where the data needs to be removed from
+        this is addressed in the try/except statements
+        the data is then saved to the Been model and deleted from either the Recommendation model or the Trip model
+    the user is then redirected to the places_been.html template at /places_been URL
+    '''
     places_been = Been.query.all()
 
     if request.method == 'POST':
@@ -103,6 +135,11 @@ def places_been():
 
 @app.route('/countries', methods=["GET", "POST"])
 def countries():
+    '''
+    accesses the Been model and creates a list of all the countries within this model
+    then iterates through this list, adding unique countries only to a new list
+    this new list is then displayed on the countries.html template at URL for /countries
+    '''
     all_countries = []
     all_info = Been.query.all()
     for info in all_info:
@@ -115,6 +152,11 @@ def countries():
 
 @app.route('/cities', methods=["GET", "POST"])
 def cities():
+    '''
+    accesses the Been model and creates a list of all the cities within this model
+    then iterates through this list, adding unique cities only to a new list
+    this new list is then displayed on the cities.html template at URL for /cities
+    '''
     all_cities = []
     all_info = Been.query.all()
     for info in all_info:
@@ -127,11 +169,27 @@ def cities():
 
 @app.route('/<int:place_id>/')
 def place(place_id):
+    '''
+    place_id has been passed to this function
+    the information for this specific places is accessed via the Been model using the place_id
+    this information is then passed to the template
+    place details are then displayed using the place.html template
+    the URL receives the place_id as an argument as well, ensuring each place will have its own specific URL
+    '''
     place = Been.query.get_or_404(place_id)
     return render_template('place.html', place=place)
 
 @app.route('/<int:place_id>/review/', methods=('GET', 'POST'))
 def review(place_id):
+    '''
+    this function also receives place_id as an argument
+    the information for this specific place is accessed through the Been model using the place_id
+    this page displays a template review.html at the specific place/review URL
+    within this template, a user can enter a review for the trip or place that has been visited
+    this function then retrieves this information, updates the Been model for this place with the information,
+        saves it and commits it to the database
+    the user is then redirected to places_been
+    '''
     place = Been.query.get_or_404(place_id)
 
     if request.method == 'POST':
@@ -154,15 +212,32 @@ def review(place_id):
 
 @app.route('/plan', methods=["GET", "POST"])
 def plan():
+    '''
+    the TripPlan model is accessed and passed to the template
+    all results are displayed using the plan.html template at URL for /plan
+    '''
     trips = TripPlan.query.all()
     return render_template('plan.html', trips=trips)
 
 @app.route('/plan_trip', methods=["GET", "POST"])
 def plan_trip():
+    '''
+    the user is shown a form using the template plan_trip.html where they can add details to make a trip plan
+        within this form, there are 3 different boxes for each country the trip will involve and the cities that will
+            be seen in each country
+    this form is then accessed with some extra formatting needed to ensure it can be utilised properly
+        the cities are made into one string, as are the countries in order to be passed to the TripPlan model
+        the date is then formatted from Jinga2 template date to python date
+    a new instance of the TripPlan model is then created, added and saved to the database session
+        some of the arguments in TripPlan are not included on the form, so these are passed in as blank strings to the new
+            instance of the model
+    the user is then redirected to trip_planner, where they can view and add further details of the trip
+        the id for the new trip is also passed to trip_planner as an argument to ensure this page can be accessed properly
+            (trip_planner URL is <trip_id>/trip_planner)
+    '''
     if request.method == 'POST':
         cities = ''
         countries = ''
-        all_places = ''
 
         city1 = request.form['city1'].title()
         if city1 != '':
@@ -217,32 +292,55 @@ def plan_trip():
 
 @app.route('/<int:trip_id>/trip_planner', methods=["GET", "POST"])
 def trip_planner(trip_id):
+    '''
+    this function allows users to see an overview of a specific trip plan
+    it takes trip_id as an argument to ensure that only one trip is displayed
+    trip_id is passed to TripPlan to access the information for that trip
+    the information then has to be processed so it can be displayed nicely within the template trip_planner.html
+        as the cities, countries, accomodation, travel, activities and non-negotiables are stored as strings within
+            the model, these have to be processed to be displayed properly within the template
+        each of these elements is accessed, the string is split and created into a list
+        this list is then passed to the template to be rendered out
+    '''
     trip = TripPlan.query.get_or_404(trip_id)
     first_record = TripPlan.query.get(trip_id)
-    # get list of countries
+
     all_countries = first_record.country
     countries = list(all_countries.split(","))
-    # get a list of cities
+
     all_cities = first_record.city
     cities = list(all_cities.split(","))
-    # get a list of accomodation
+
     all_accomodation = first_record.accomodation
     accomodation = list(all_accomodation.split(','))
-    # get a list of travel
+
     all_travel = first_record.travel
     travel = list(all_travel.split())
-    # get a list of activities
+
     all_activities = first_record.day_overview
     activities = list(all_activities.split(','))
-    # get a list of non-negotiables
+
     all_non_negs = first_record.non_negotiables
     non_negotiables = list(all_non_negs.split(','))
+
     return render_template('trip_planner.html', trip=trip, countries=countries, cities=cities,
                            accomodation=accomodation, travel=travel, activities=activities,
                            non_negotiables=non_negotiables, trip_id=trip.id)
 
 @app.route('/<int:trip_id>/edit_trip', methods=["GET", "POST"])
 def edit_trip(trip_id):
+    '''
+    this function also takes trip_id as an argument to ensure that the specific trip can be edited
+    the TripPlan model is accessed using the trip_id and the information displayed on the page according to the
+        edit_trip.html template
+    the template will display the information within a form so that information can be edited if needed
+    the information retrieved from the form using the request.method == 'POST' part of the code is then processed
+        the dates are processed in the same way as the above function
+        for each section involving a cost, an if/else statement is used to enable use of the sum method to calculate the
+            cost of each section as well as the overall cost of the trip
+    the information taken from the form is then passed back into the TripPlan model and the changes are saved
+    the user is then redirected to trip_planner
+    '''
     trip = TripPlan.query.get_or_404(trip_id)
 
     if request.method == 'POST':
@@ -332,6 +430,15 @@ def edit_trip(trip_id):
 
 @app.route('/finalised_trips', methods=["GET", "POST"])
 def finalised_trips():
+    '''
+    on this page, all finalised trips are displayed using the finalised_trips.html template at the URL for /finalised trips
+    the information is accessed using a query of the Trip model and then passed to the template as an argument
+    this page can also be accessed by clicking the 'finalise trip' button on the trip_plan webpage
+        clicking this button submit certain information via a POST request
+        this information is then accessed, processed and saved as a new instance of the Trip model
+        the information is then deleted from the model it was previously stored in (TripPlan)
+    the user is then returned to the URL for finalised_trips
+    '''
     trips = Trip.query.all()
 
     if request.method == 'POST':
@@ -369,7 +476,7 @@ def finalised_trips():
 
     return render_template('finalised_trips.html', trips=trips)
 
-#TO START DB
+#TO START DB ONLY
 '''
 with app.app_context():
     #db.drop_all() #to delete all info in the database

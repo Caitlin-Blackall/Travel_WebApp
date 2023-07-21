@@ -3,7 +3,7 @@
 {% block content %}
     <h1 class="sub-headings">{% block title %} Places to Go {% endblock %}</h1>
     <div class="add">
-        <a href="{{ url_for('add_recommendation') }}"><h3>Add New Recommendation</h3></a>
+        <a href="{{ url_for('add_recommendation') }}"><h3 class="trip_planning">Add New Recommendation</h3></a>
     </div>
     <div class="content">
         {% for place in recommendations %}
@@ -19,13 +19,6 @@
                     <input type="hidden" name="recommendation" value="{{ place.recommendation }}">
                     <input type="hidden" name="place_id" value="{{ place.id }}">
                     <button type="submit">I've Been Here</button>
-                </form>
-                <form method="post" action="city_plan">
-                    <input type="hidden" name="city" value="{{ place.city }}">
-                    <input type="hidden" name="country" value="{{ place.country }}">
-                    <input type="hidden" name="recommendation" value="{{ place.recommendation }}">
-                    <input type="hidden" name="place_id" value="{{ place.id }}">
-                    <button type="submit">Plan this Trip</button>
                 </form>
             </div>
         {% endfor %}
