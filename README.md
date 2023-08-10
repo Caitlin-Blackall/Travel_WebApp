@@ -2,7 +2,7 @@
 
 *Completed July 2023*
 
-## Idea
+## Project Overview
 I have recently completed a Flask WebApp course and wanted to
 put some of the skills I learnt into practice. I have always 
 loved travelling and have often wanted an easy way to track 
@@ -10,7 +10,55 @@ recommendations, places I have been and to plan trips. This
 seemed like the perfect opportunity to create a Flask WebApp for
 this.
 
-## Process
+## Local Dev Set-Up
+### Pre-Requisites:
++ [pip](https://pypi.org/project/pip/)
++ [venv](https://docs.python.org/3/library/venv.html)
++ [Pandas](https://pypi.org/project/pandas/)
++ git
+
+### Installations:
++ ```pip install flask```
++ ```pip install flask_wtf```
++ ```pip install flask_sqlalchemy```
+
+### Database Set-Up:
+The database is managed with SQL via SQLAlchemy. When the project is 
+first initialised, the database needs to be created using the following 
+command:
+```python
+with app.app_context():
+    db.create_all()
+```
+
+To delete all models and data within the database, use the following command:
+```python
+with app.app_context():
+    db.drop_all()
+```
+
+### Running the App
+This project is run locally only. As such, in order to access the 
+app, a local copy must be made first.
+
+1. Enter the directory where the clone will be made.
+
+
+2. ```git clone [enter SSH key here]```
+
+Once a clone has been made, the app can be activated.
+
+1. ```source bin/activate```
+
+
+2. ```flask run```
+
+
+The app will then be accessible on the local development server.
+
+To close the app when finished, use ```^C``` followed by ```deactivate```.
+
+## Development Process
 I knew that I wanted 4 different sections in this project - 
 a home page, recommendations on where to go, a list 
 of where I had been and a section dedicated to trip planning.
