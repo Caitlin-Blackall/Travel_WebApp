@@ -14,8 +14,7 @@ this.
 ### Pre-Requisites:
 + [pip](https://pypi.org/project/pip/)
 + [venv](https://docs.python.org/3/library/venv.html)
-+ [Pandas](https://pypi.org/project/pandas/)
-+ git
++ [Git](https://git-scm.com/)
 
 ### Installations:
 + ```pip install flask```
